@@ -25,15 +25,15 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body shadow">
-                        <span class="fw-bold">{{$post->user->name}} 
+                        <span class="fw-bold">{{ $post->user->name }} 
                             @if($post->user->id === Auth::user()->id)
-                            <a href="{{ route('deletepost', $post->id)}}" class="btn btn-dark-subtle btn-sm float-end">Delete</a> 
+                            <a href="{{ route('deletepost', $post->id) }}" class="btn btn-dark-subtle btn-sm float-end">Delete</a> 
                             @endif
                         </span>
                         
                         <br><small>{{$post->created_at->diffForHumans()}}</small>
                         <br>
-                        <p>{{$post->content}}</p>
+                        <p>{{ $post->content }}</p>
 
                             <div class="card">
                                 <div class="card-body">
@@ -46,17 +46,19 @@
                                     
                                 </div>
                             </div>
-
-                            <div class="card mt-3">
-                                <div class="card-body">
-                                    <span class="fw-bold">Bini colet</span>
-                                    <small>a few minutes ago</small>
-                                    <br>
-                                    <div class="border rounded p-1">
-                                        <p>Drama mo boi!!!!!</p>
+                            @foreach($post->comments->reverse() as $comment)
+                                <div class="card mt-3">
+                                    <div class="card-body">
+                                        <span class="fw-bold">{{ $comment->user->name }}</span>
+                                        <small>{{$comment->created_at->diffForHumans()}}</small>
+                                        <br>
+                                        <div class="p-1">
+                                            <p>{{ $comment->content }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
+                            
                     </div>
 
                 </div>
