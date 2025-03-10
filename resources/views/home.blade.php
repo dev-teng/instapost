@@ -12,7 +12,7 @@
                 <div class="card-body shadow">
                     <form action="{{ route('createpost')}}" method="POST">
                         @csrf
-                        <input name="content" class="form-control" type="text" placeholder="What's on your mind? 🗨️">
+                        <input name="content" class="form-control" type="text" placeholder="What's on your mind? 🗨️" required>
                         <button type="submit" class="btn btn-dark float-end mt-3">Create post</button>
                     </form>
                 </div>
@@ -37,8 +37,13 @@
 
                             <div class="card">
                                 <div class="card-body">
-                                    <input class="form-control" type="text" placeholder="Write a comment...">
-                                    <button class="btn btn-dark float-end mt-3">Submit</button>
+                                    <form action="{{ route('createcomment') }}" method="POST">
+                                        @csrf
+                                        <input name="content" class="form-control" type="text" placeholder="Write a comment..." required>
+                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                        <button type="submit" class="btn btn-dark float-end mt-3">Submit</button>
+                                    </form>
+                                    
                                 </div>
                             </div>
 
